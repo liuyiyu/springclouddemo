@@ -64,4 +64,15 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</repository>
+		<repository>
+			<id>azure</id>
+			<url>https://repo.azure.microsoft.com/maven/</url>
+		</repository>
+	</repositories>
+
 </project>
