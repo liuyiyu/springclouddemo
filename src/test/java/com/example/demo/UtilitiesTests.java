@@ -3,7 +3,6 @@ package com.example.demo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -70,5 +69,19 @@ class UtilitiesTests {
         assertFalse(Utilities.connectStrVNET.isEmpty(), "VNET connection string should not be empty");
         
         assertEquals(Utilities.connectStrVNET, Utilities.connectStrA, "Default connection string should be VNET");
+    }
+    
+    @Test
+    void testDatabaseConnection() {
+        try {
+            Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+            assertNotNull(connection, "Database connection should be established");
+            assertFalse(connection.isClosed(), "Connection should be open");
+            
+            connection.close();
+            assertTrue(connection.isClosed(), "Connection should be closed");
+        } catch (Exception e) {
+            fail("Database connection failed: " + e.getMessage());
+        }
     }
 }
